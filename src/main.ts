@@ -14,7 +14,7 @@ async function bootstrap() {
   const ringApi = new RingApi({ refreshToken });
 
   ringApi.onRefreshTokenUpdated.subscribe(({ newRefreshToken }) => {
-    console.log('update token');
+    console.info('update token');
     void promises.writeFile('.token', newRefreshToken);
   });
 
@@ -28,6 +28,7 @@ async function bootstrap() {
   cameras.forEach((camera) => {
     camera.onNewNotification.subscribe((notification) => {
       if (notification.action === PushNotificationAction.Ding) {
+        console.info('ding');
         void axios.post(webhookUrl);
       }
     });
