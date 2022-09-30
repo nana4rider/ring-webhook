@@ -4,7 +4,7 @@ import { PushNotificationAction, RingApi } from 'ring-client-api';
 
 async function bootstrap() {
   const refreshTokenBuffer = await promises.readFile('.token');
-  const refreshToken = refreshTokenBuffer.toString();
+  const refreshToken = refreshTokenBuffer.toString().trim();
   const webhookUrl = process.env.WEBHOOK_URL;
   if (!webhookUrl) {
     console.warn('undefined webhook url');
